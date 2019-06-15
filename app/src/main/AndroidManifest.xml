@@ -3,6 +3,7 @@
     package="emschenn.csie.ncku.webparsetest">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -20,6 +21,12 @@
         </activity>
         <activity android:name=".Contact" />
         <activity android:name=".Teach"></activity>
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
     </application>
+
 
 </manifest>
