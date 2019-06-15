@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">WebParseTest</string>
+    <string-array name="init">
+        <item>選擇網站</item>
+    </string-array>
+    <string-array name="all">
+        <item>58B.TV (https://www.58b.tv/)</item>
+        <item>bilibili (https://www.bilibili.com/)</item>
+        <item>Anime1.me (https://anime1.me/)</item>
+        <item>小鴨影音 (http://www.157mov.com/)</item>
+        <item>MOVIE SUN (http://moviesun101.com/)</item>
+        <item>VM美劇 (https://vmus.cc/)</item>
+    </string-array>
+    <string-array name="japan">
+        <item>bilibili (https://www.bilibili.com/)</item>
+        <item>Anime1.me (https://anime1.me/)</item>
+    </string-array>
+    <string-array name="america">
+        <item>MOVIE SUN (http://moviesun101.com/)</item>
+        <item>VM美劇 (https://vmus.cc/)</item>
+    </string-array>
+</resources>

@@ -1,0 +1,50 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!--style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar"-->
+        <!-- Customize your theme here. -->
+        <!--item name="colorPrimary">@color/colorPrimary</item-->
+    <!--item name="colorPrimaryDark">@color/colorPrimaryDark</item-->
+    <!--item name="colorAccent">@color/colorAccent</item-->
+    <!--/style-->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="chipIconTint">@color/chipIconTint</item>
+    </style>
+
+    <style name="MyEditTextStyle" parent="android:Widget.EditText">
+        <item name="android:textColor">#000000</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:radius">15dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/colorAccent</item>
+    </style>
+
+    <style name="CardViewStyle" parent="CardView">
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:minHeight">200dp</item>
+        <item name="cardBackgroundColor">#dcdcdc</item>
+        <item name="cardCornerRadius">8dp</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+    </style>
+
+    <style name="Widget.CardContent" parent="android:Widget">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+
+    </style>
+</resources>

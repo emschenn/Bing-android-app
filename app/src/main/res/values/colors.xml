@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFAC1E</color>
+    <color name="colorPrimaryDark">#DCDCDC</color>
+    <color name="colorAccent">#124259</color>
+    <color name="chipIconTint">#FFB300</color>
+    <color name="colorDarkBlue">#022B3D</color>
+</resources>
