@@ -28,6 +28,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     public String notify = "";
     private cardData oldcard;
     private cardData newcard;
+
     /**
      * Called when the BroadcastReceiver receives an Intent broadcast.
      *
@@ -74,26 +75,34 @@ public class AlarmReceiver extends BroadcastReceiver {
             if(MainActivity.myList3.get(i).charAt(0) =='M'){
                 website = 1;
             }
-            oldcard = new cardData(MainActivity.myList1.get(i),MainActivity.myList2.get(i),MainActivity.myList3.get(i));
-            newcard = new cardData(crawl.crawl_func(website,MainActivity.myList2.get(i)),MainActivity.myList2.get(i),MainActivity.myList3.get(i));
-            MainActivity.cards.update(oldcard,newcard);
-            notify += crawl.crawl_func(website,MainActivity.myList2.get(i))+"\n";
-        }
-        System.out.println(notify);
-        // Build the notification
-        NotificationCompat.Builder builder = new NotificationCompat.Builder
-                (context, PRIMARY_CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("更新囉")
-                .setContentText(notify)
-                .setContentIntent(contentPendingIntent)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setAutoCancel(true)
-                .setDefaults(NotificationCompat.DEFAULT_ALL);
 
-        // Deliver the notification
-        mNotificationManager.notify(NOTIFICATION_ID, builder.build());
-        contentIntent.putExtra("re",MainActivity.myList1);
+            oldcard = new cardData(MainActivity.myList2.get(i),MainActivity.myList3.get(i),MainActivity.myList1.get(i));
+            newcard = new cardData(MainActivity.myList2.get(i),MainActivity.myList3.get(i),crawl.crawl_func(website,MainActivity.myList2.get(i)));
+            MainActivity.cards.update(oldcard,newcard);
+            if(!MainActivity.myList1.get(i).equals(crawl.crawl_func(website,MainActivity.myList2.get(i)))){
+                notify += MainActivity.myList2.get(i)+" : "+crawl.crawl_func(website,MainActivity.myList2.get(i))+"\n";
+            }
+        }
+        //System.out.println(notify);
+        if(!notify.equals("")){
+            System.out.println(notify);
+            // Build the notification
+            NotificationCompat.Builder builder = new NotificationCompat.Builder
+                    (context, PRIMARY_CHANNEL_ID)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle("更新囉")
+                    .setContentText(notify)
+                    .setContentIntent(contentPendingIntent)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setAutoCancel(true)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL);
+
+            // Deliver the notification
+            mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+        }else {
+            System.out.println("no change");
+        }
+
 
     }
 

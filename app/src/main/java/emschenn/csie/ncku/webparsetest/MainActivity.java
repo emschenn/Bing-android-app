@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
     private FloatingActionButton fab;
     private Toolbar toolbar;
     private String url ="http://moviesun101.com/";
@@ -97,8 +96,7 @@ public class MainActivity extends AppCompatActivity {
             "primary_notification_channel";
     private SharedPreferences mPreferences;
     private String sharedPrefFile = "com.example.alarmmanager";
-    private cardData oldcard;
-    private cardData newcard;
+
 
     public static cardViewModel cards;
 
@@ -119,72 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        alarmToggle = findViewById(R.id.alarmToggle);
 
-        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-        alarmToggle.setChecked(mPreferences.getBoolean("check", false));
-
-        Intent notifyIntent = new Intent(this, AlarmReceiver.class);
-        boolean alarmUp = (PendingIntent.getBroadcast(this, NOTIFICATION_ID, notifyIntent,
-                PendingIntent.FLAG_NO_CREATE) != null);
-        //alarmToggle.setChecked(alarmUp);
-        final PendingIntent notifyPendingIntent = PendingIntent.getBroadcast
-                (this, NOTIFICATION_ID, notifyIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
-        final AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        TextView a = findViewById(R.id.title);
-
-        // Set the click listener for the toggle button.
-        alarmToggle.setOnCheckedChangeListener
-                (new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged
-                            (CompoundButton buttonView, boolean isChecked) {
-                        String toastMessage;
-                        if (isChecked) {
-
-                            //long repeatInterval = AlarmManager.INTERVAL_FIFTEEN_MINUTES;
-
-                            //long triggerTime = SystemClock.elapsedRealtime() + repeatInterval;
-
-                            // Set the alarm to start at approximately 2:00 p.m.
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTimeInMillis(System.currentTimeMillis());
-                            calendar.set(Calendar.HOUR_OF_DAY, 0);
-                            calendar.set(Calendar.MINUTE, 19);
-                            calendar.set(Calendar.SECOND, 0);
-                            calendar.set(Calendar.MILLISECOND, 0);
-
-
-                            // If the Toggle is turned on, set the repeating alarm with
-                            // a 15 minute interval.
-                            if (alarmManager != null) {
-                                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                                        1000 * 60, notifyPendingIntent);
-                            }
-                            // Set the toast message for the "on" case.
-                            toastMessage = "on";
-
-                        } else {
-                            // Cancel notification if the alarm is turned off.
-                            mNotificationManager.cancelAll();
-
-                            if (alarmManager != null) {
-                                alarmManager.cancel(notifyPendingIntent);
-                            }
-                            // Set the toast message for the "off" case.
-                            toastMessage = "off";
-
-                        }
-
-                        // Show a toast to say the alarm is turned on or off.
-                        Toast.makeText(MainActivity.this, toastMessage,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        // Create the notification channel.
-        createNotificationChannel();
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -241,17 +174,8 @@ public class MainActivity extends AppCompatActivity {
                     myList3.add(i,temp3);
                 }
 
-
-
-                System.out.print(111);
-                oldcard = new cardData("The Voice","58","??");
-                newcard = new cardData("The Voice","58","10");
-                MainActivity.cards.update(oldcard,newcard);
-                //System.out.println(adapter.getCardAtPosition(0).getTitle());
             }
         });
-
-        //System.out.println(pass.get(0).b);
 
         // Add the functionality to swipe items in the
         // recycler view to delete that item
@@ -278,6 +202,74 @@ public class MainActivity extends AppCompatActivity {
                 });
         // Attach the item touch helper to the recycler view
         helper.attachToRecyclerView(recyclerView);
+
+
+        alarmToggle = findViewById(R.id.alarmToggle);
+
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+        alarmToggle.setChecked(mPreferences.getBoolean("check", false));
+
+        Intent notifyIntent = new Intent(this, AlarmReceiver.class);
+        boolean alarmUp = (PendingIntent.getBroadcast(this, NOTIFICATION_ID, notifyIntent,
+                PendingIntent.FLAG_NO_CREATE) != null);
+        //alarmToggle.setChecked(alarmUp);
+        final PendingIntent notifyPendingIntent = PendingIntent.getBroadcast
+                (this, NOTIFICATION_ID, notifyIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+        final AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        TextView a = findViewById(R.id.title);
+
+        // Set the click listener for the toggle button.
+        alarmToggle.setOnCheckedChangeListener
+                (new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged
+                            (CompoundButton buttonView, boolean isChecked) {
+                        String toastMessage;
+                        if (isChecked) {
+
+                            //long repeatInterval = AlarmManager.INTERVAL_FIFTEEN_MINUTES;
+
+                            //long triggerTime = SystemClock.elapsedRealtime() + repeatInterval;
+
+                            // Set the alarm to start at approximately 2:00 p.m.
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.setTimeInMillis(System.currentTimeMillis());
+                            calendar.set(Calendar.HOUR_OF_DAY, 0);
+                            calendar.set(Calendar.MINUTE, 0);
+                            calendar.set(Calendar.SECOND, 0);
+                            calendar.set(Calendar.MILLISECOND, 0);
+
+
+                            // If the Toggle is turned on, set the repeating alarm with
+                            // a 15 minute interval.
+                            if (alarmManager != null) {
+                                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                                        1000 * 120, notifyPendingIntent);
+                            }
+                            // Set the toast message for the "on" case.
+                            toastMessage = "on";
+
+                        } else {
+                            // Cancel notification if the alarm is turned off.
+                            mNotificationManager.cancelAll();
+
+                            if (alarmManager != null) {
+                                alarmManager.cancel(notifyPendingIntent);
+                            }
+                            // Set the toast message for the "off" case.
+                            toastMessage = "off";
+
+                        }
+
+                        // Show a toast to say the alarm is turned on or off.
+                        Toast.makeText(MainActivity.this, toastMessage,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        // Create the notification channel.
+        createNotificationChannel();
     }
 
 
@@ -501,7 +493,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.print(1111);
     }
 
 
