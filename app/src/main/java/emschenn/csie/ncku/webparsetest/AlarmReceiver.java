@@ -38,7 +38,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         mNotificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
-        MainActivity.getInstace().cards.update(oldcard,newcard);
+
         // Deliver the notification.
         deliverNotification(context);
     }
