@@ -55,4 +55,8 @@
         <item name="android:colorForeground">#80ffffff</item>
     </style>
 
+    <style name="ThemeOverlay.menu" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:colorBackground">@color/colorDarkBlue</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+    </style>
 </resources>
