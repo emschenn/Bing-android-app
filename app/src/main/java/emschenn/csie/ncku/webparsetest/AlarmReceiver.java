@@ -12,6 +12,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Broadcast receiver for the alarm, which delivers the notification.
  */
@@ -23,7 +25,9 @@ public class AlarmReceiver extends BroadcastReceiver {
     // Notification channel ID.
     private static final String PRIMARY_CHANNEL_ID =
             "primary_notification_channel";
-
+    public String notify = "";
+    private cardData oldcard;
+    private cardData newcard;
     /**
      * Called when the BroadcastReceiver receives an Intent broadcast.
      *
@@ -52,28 +56,36 @@ public class AlarmReceiver extends BroadcastReceiver {
         PendingIntent contentPendingIntent = PendingIntent.getActivity
                 (context, NOTIFICATION_ID, contentIntent, PendingIntent
                         .FLAG_UPDATE_CURRENT);
-
-        if (android.os.Build.VERSION.SDK_INT > 9)
-        {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
+        notify = "";
+        for(int i=0;i<MainActivity.myList1.size();i++){
+            int website = -1;
+            if(MainActivity.myList3.get(i).charAt(0) =='5'){
+                website = 5;
+            }
+            if(MainActivity.myList3.get(i).charAt(0) =='A'){
+                website = 4;
+            }
+            if(MainActivity.myList3.get(i).charAt(0) =='1'){
+                website = 3;
+            }
+            if(MainActivity.myList3.get(i).charAt(0) =='V'){
+                website = 2;
+            }
+            if(MainActivity.myList3.get(i).charAt(0) =='M'){
+                website = 1;
+            }
+            oldcard = new cardData(MainActivity.myList1.get(i),MainActivity.myList2.get(i),MainActivity.myList3.get(i));
+            newcard = new cardData(crawl.crawl_func(website,MainActivity.myList2.get(i)),MainActivity.myList2.get(i),MainActivity.myList3.get(i));
+            MainActivity.cards.update(oldcard,newcard);
+            notify += crawl.crawl_func(website,MainActivity.myList2.get(i))+"\n";
         }
-        String a = "";
-        try {
-            System.out.println("11111");
-            Document xmlDoc = Jsoup.connect("https://rain020527.github.io/web3test/").get(); //使用Jsoup jar 去解析網頁
-            a = xmlDoc.select("div").text();//.select("ul").select("li");
-            System.out.println(a);//title.select("a").get(0).text()); //得到title tag的內容
-        }catch(Exception e){
-            System.out.println("aaa");
-        }
-
+        System.out.println(notify);
         // Build the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder
                 (context, PRIMARY_CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("g")
-                .setContentText(a)
+                .setContentTitle("更新囉")
+                .setContentText(notify)
                 .setContentIntent(contentPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
@@ -81,6 +93,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         // Deliver the notification
         mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+        contentIntent.putExtra("re",MainActivity.myList1);
+
     }
 
 
