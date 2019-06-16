@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -24,16 +25,13 @@ public class Teach extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
         toolbar.setPadding(15,0,0,0);
-        toolbar.setTitle("使用教學");
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                if(menuItem.getTitle().equals("聯絡我們")){
-                    Intent intent = new Intent(Teach.this, Contact.class);
-                    startActivity(intent);
-                }
-                return false;
+            public void onClick(View v) {
+                Intent intent = new Intent(Teach.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 

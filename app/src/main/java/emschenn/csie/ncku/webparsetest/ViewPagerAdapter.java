@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import static android.widget.ImageView.ScaleType.CENTER_CROP;
+
 public class ViewPagerAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer[] images = { R.drawable.help, R.drawable.help2 };
+    private Integer[] images = { R.drawable.step1, R.drawable.step2 };
 
     public ViewPagerAdapter(Context context) {
         this.context = context;
@@ -34,7 +36,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         View view = layoutInflater.inflate(R.layout.custom_layout,null);
         ImageView imageView = view.findViewById(R.id.imageView);
         imageView.setImageResource(images[position]);
-
+        imageView.setScaleType(CENTER_CROP);
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view,0);
         return view;
