@@ -8,6 +8,8 @@ import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +21,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.DocumentsContract;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.chip.Chip;
 import android.support.design.widget.FloatingActionButton;
@@ -31,6 +34,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
@@ -62,6 +66,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
@@ -80,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mPreferences;
     private String sharedPrefFile = "com.example.alarmmanager";
     private ToggleButton alarmToggle;
+    private cardViewModel cards;
 
     //String and Integer array for Recycler View Items
 //    public static final String[] TITLES= {"進擊的巨人","Running Man","安眠書店"};
@@ -186,6 +192,44 @@ public class MainActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
         initViews();
         //populatRecyclerView();
+
+        // change cards
+        final cardAdapter adapter = new cardAdapter(this);
+        recyclerView.setAdapter(adapter);
+        cards = ViewModelProviders.of(this).get(cardViewModel.class);
+        cards.getAllCards().observe(this, new Observer<List<cardData>>() {
+            @Override
+            public void onChanged(@Nullable final List<cardData> Cards) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setCards(Cards);
+            }
+        });
+
+        // Add the functionality to swipe items in the
+        // recycler view to delete that item
+        ItemTouchHelper helper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0,
+                        ItemTouchHelper.UP) {
+                    @Override
+                    // We are not implementing onMove() in this app
+                    public boolean onMove(RecyclerView recyclerView,
+                                          RecyclerView.ViewHolder viewHolder,
+                                          RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    // When the use swipes a word,
+                    // delete that word from the database.
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                        int position = viewHolder.getAdapterPosition();
+                        cardData myCard = adapter.getCardAtPosition(position);
+                        // Delete the word
+                        cards.deleteCard(myCard);
+                    }
+                });
+        // Attach the item touch helper to the recycler view
+        helper.attachToRecyclerView(recyclerView);
     }
 
 
@@ -297,13 +341,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 revealShow(dialogView, false, dialog);
                 title = editText.getText().toString();
-                arrayList.add(new cardData(title,site,"??"));
-                RecyclerView_Adapter adapter = new RecyclerView_Adapter(MainActivity.this, arrayList);
-                recyclerView.setAdapter(adapter);// set adapter on recyclerview
-                adapter.notifyDataSetChanged();// Notify the adapter
+                //arrayList.add(new cardData(title,site,"??"));
+                //RecyclerView_Adapter adapter = new RecyclerView_Adapter(MainActivity.this, arrayList);
+                //recyclerView.setAdapter(adapter);// set adapter on recyclerview
+                //adapter.notifyDataSetChanged();// Notify the adapter
                 Log.d("title",title);
                 Log.d("site",site);
                 //addCard(title,site);
+                cards.insert(new cardData(title,site,"??"));
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
