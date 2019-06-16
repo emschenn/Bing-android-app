@@ -12,6 +12,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Broadcast receiver for the alarm, which delivers the notification.
  */
@@ -24,6 +26,8 @@ public class AlarmReceiver extends BroadcastReceiver {
     private static final String PRIMARY_CHANNEL_ID =
             "primary_notification_channel";
     public String notify = "";
+    private cardData oldcard;
+    private cardData newcard;
     /**
      * Called when the BroadcastReceiver receives an Intent broadcast.
      *
@@ -70,6 +74,9 @@ public class AlarmReceiver extends BroadcastReceiver {
             if(MainActivity.myList3.get(i).charAt(0) =='M'){
                 website = 1;
             }
+            oldcard = new cardData(MainActivity.myList1.get(i),MainActivity.myList2.get(i),MainActivity.myList3.get(i));
+            newcard = new cardData(crawl.crawl_func(website,MainActivity.myList2.get(i)),MainActivity.myList2.get(i),MainActivity.myList3.get(i));
+            MainActivity.cards.update(oldcard,newcard);
             notify += crawl.crawl_func(website,MainActivity.myList2.get(i))+"\n";
         }
         System.out.println(notify);
@@ -86,6 +93,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         // Deliver the notification
         mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+        contentIntent.putExtra("re",MainActivity.myList1);
+
     }
 
 

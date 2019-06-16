@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ActivityOptions;
 import android.app.AlarmManager;
+import android.app.Application;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -11,6 +12,8 @@ import android.app.PendingIntent;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +31,7 @@ import android.support.design.chip.Chip;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -67,11 +71,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+
+
+
+
     private FloatingActionButton fab;
     private Toolbar toolbar;
     private String url ="http://moviesun101.com/";
@@ -87,11 +97,16 @@ public class MainActivity extends AppCompatActivity {
             "primary_notification_channel";
     private SharedPreferences mPreferences;
     private String sharedPrefFile = "com.example.alarmmanager";
-    private cardViewModel cards;
+    private cardData oldcard;
+    private cardData newcard;
+
+    public static cardViewModel cards;
+
+
     public static ArrayList<String> myList1 = new ArrayList<String>();
     public static ArrayList<String> myList2 = new ArrayList<String>();
     public static ArrayList<String> myList3 = new ArrayList<String>();
-    private SwitchCompat alarmToggle;
+    //private SwitchCompat alarmToggle;
     //String and Integer array for Recycler View Items
 //    public static final String[] TITLES= {"進擊的巨人","Running Man","安眠書店"};
 //    public static final String[] WEBSITES = {"bilibili","小鴨影音","VM美劇"};
@@ -101,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         alarmToggle = findViewById(R.id.alarmToggle);
 
@@ -212,6 +229,9 @@ public class MainActivity extends AppCompatActivity {
                 String temp1 = "";
                 String temp2 = "";
                 String temp3 = "";
+                myList1.clear();
+                myList2.clear();
+                myList3.clear();
                 for(int i=0;i<adapter.getItemCount();i++){
                     temp1 = adapter.getCardAtPosition(i).getEpisode();
                     temp2 = adapter.getCardAtPosition(i).getTitle();
@@ -223,7 +243,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+                System.out.print(111);
+                oldcard = new cardData("The Voice","58","??");
+                newcard = new cardData("The Voice","58","10");
+                MainActivity.cards.update(oldcard,newcard);
                 //System.out.println(adapter.getCardAtPosition(0).getTitle());
             }
         });
@@ -444,7 +467,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void createNotificationChannel() {
-
         // Create a notification manager object.
         mNotificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -476,4 +498,11 @@ public class MainActivity extends AppCompatActivity {
         preferencesEditor.putBoolean("check", alarmToggle.isChecked());
         preferencesEditor.apply();
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.print(1111);
+    }
+
+
 }
