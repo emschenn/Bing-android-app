@@ -9,6 +9,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -86,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
     private String sharedPrefFile = "com.example.alarmmanager";
     private ToggleButton alarmToggle;
     private cardViewModel cards;
+    public ArrayList<String> myList1 = new ArrayList<String>();
+    public ArrayList<String> myList2 = new ArrayList<String>();
+    public ArrayList<String> myList3 = new ArrayList<String>();
 
     //String and Integer array for Recycler View Items
 //    public static final String[] TITLES= {"進擊的巨人","Running Man","安眠書店"};
@@ -110,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 (this, NOTIFICATION_ID, notifyIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT);
         final AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        TextView a = findViewById(R.id.title);
 
         // Set the click listener for the toggle button.
         alarmToggle.setOnCheckedChangeListener
@@ -202,8 +207,27 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(@Nullable final List<cardData> Cards) {
                 // Update the cached copy of the words in the adapter.
                 adapter.setCards(Cards);
+                
+                String temp1 = "";
+                String temp2 = "";
+                String temp3 = "";
+                for(int i=0;i<adapter.getItemCount();i++){
+                    temp1 = adapter.getCardAtPosition(i).getEpisode();
+                    temp2 = adapter.getCardAtPosition(i).getTitle();
+                    temp3 = adapter.getCardAtPosition(i).getWebsite();
+                    myList1.add(i,temp1);
+                    myList2.add(i,temp2);
+                    myList3.add(i,temp3);
+                }
+
+
+
+
+                //System.out.println(adapter.getCardAtPosition(0).getTitle());
             }
         });
+
+        //System.out.println(pass.get(0).b);
 
         // Add the functionality to swipe items in the
         // recycler view to delete that item
