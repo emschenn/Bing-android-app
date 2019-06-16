@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WebParseTest</string>
+    <string name="app_name">Bing!</string>
     <string-array name="init">
         <item>選擇網站</item>
     </string-array>
