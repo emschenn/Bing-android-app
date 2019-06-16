@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "39443239869",
+    "firebase_url": "https://bing-usercomments.firebaseio.com",
+    "project_id": "bing-usercomments",
+    "storage_bucket": "bing-usercomments.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39443239869:android:c482e3a4ec2061fc",
+        "android_client_info": {
+          "package_name": "emschenn.csie.ncku.webparsetest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39443239869-8g2nh9fcuu0vvo6757dejsn8tsh5rncm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "emschenn.csie.ncku.webparsetest",
+            "certificate_hash": "6eabbfe6433e440ff6ebb9841360a950856ecc3a"
+          }
+        },
+        {
+          "client_id": "39443239869-1cnpndrptt6qf09jmqsj3eme20bvb54m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD32MJlp90FUbPmCksKPVFOkYF8LJbqLAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39443239869-1cnpndrptt6qf09jmqsj3eme20bvb54m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
