@@ -53,27 +53,13 @@ public class AlarmReceiver extends BroadcastReceiver {
                 (context, NOTIFICATION_ID, contentIntent, PendingIntent
                         .FLAG_UPDATE_CURRENT);
 
-        if (android.os.Build.VERSION.SDK_INT > 9)
-        {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-        String a = "";
-        try {
-            System.out.println("11111");
-            Document xmlDoc = Jsoup.connect("https://rain020527.github.io/web3test/").get(); //使用Jsoup jar 去解析網頁
-            a = xmlDoc.select("div").text();//.select("ul").select("li");
-            System.out.println(a);//title.select("a").get(0).text()); //得到title tag的內容
-        }catch(Exception e){
-            System.out.println("aaa");
-        }
 
         // Build the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder
                 (context, PRIMARY_CHANNEL_ID)
                 .setSmallIcon(R.drawable.notify)
-                .setContentTitle("g")
-                .setContentText(a)
+                .setContentTitle("更新囉")
+                .setContentText(crawl.crawl_func(5,"running man"))
                 .setContentIntent(contentPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
