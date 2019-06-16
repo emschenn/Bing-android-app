@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences mPreferences;
     private String sharedPrefFile = "com.example.alarmmanager";
     private cardViewModel cards;
-    public ArrayList<String> myList1 = new ArrayList<String>();
-    public ArrayList<String> myList2 = new ArrayList<String>();
-    public ArrayList<String> myList3 = new ArrayList<String>();
-
+    public static ArrayList<String> myList1 = new ArrayList<String>();
+    public static ArrayList<String> myList2 = new ArrayList<String>();
+    public static ArrayList<String> myList3 = new ArrayList<String>();
+    private SwitchCompat alarmToggle;
     //String and Integer array for Recycler View Items
 //    public static final String[] TITLES= {"進擊的巨人","Running Man","安眠書店"};
 //    public static final String[] WEBSITES = {"bilibili","小鴨影音","VM美劇"};

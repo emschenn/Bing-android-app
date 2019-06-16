@@ -21,7 +21,7 @@ public class crawl {
             StrictMode.setThreadPolicy(policy);
         }
         switch (i){
-            //1 moviesun; 2 VM美劇; 3 157; 4 anime1.me; 5
+            //1 moviesun; 2 VM美劇; 3 157; 4 anime1.me; 5 58
             case 1 :
                 String url1 = "http://moviesun101.com/";
                 try {
