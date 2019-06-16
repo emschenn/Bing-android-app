@@ -38,7 +38,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         mNotificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
-
+        MainActivity.getInstace().cards.update(oldcard,newcard);
         // Deliver the notification.
         deliverNotification(context);
     }
@@ -74,8 +74,8 @@ public class AlarmReceiver extends BroadcastReceiver {
             if(MainActivity.myList3.get(i).charAt(0) =='M'){
                 website = 1;
             }
-            oldcard = new cardData(MainActivity.myList1.get(i),MainActivity.myList2.get(i),MainActivity.myList3.get(i));
-            newcard = new cardData(crawl.crawl_func(website,MainActivity.myList2.get(i)),MainActivity.myList2.get(i),MainActivity.myList3.get(i));
+            oldcard = new cardData(MainActivity.myList2.get(i),MainActivity.myList3.get(i),MainActivity.myList1.get(i));
+            newcard = new cardData(crawl.crawl_func(website,MainActivity.myList2.get(i)),MainActivity.myList3.get(i),MainActivity.myList1.get(i));
             MainActivity.cards.update(oldcard,newcard);
             notify += crawl.crawl_func(website,MainActivity.myList2.get(i))+"\n";
         }
