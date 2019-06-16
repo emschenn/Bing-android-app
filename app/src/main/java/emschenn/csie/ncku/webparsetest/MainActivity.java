@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     private ConstraintLayout layout;
     private static RecyclerView recyclerView;
     ArrayList<cardData> arrayList;
-
+    private SwitchCompat alarmToggle;
     private NotificationManager mNotificationManager;
     private static final int NOTIFICATION_ID = 0;
     // Notification channel ID.
