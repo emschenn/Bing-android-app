@@ -33,6 +33,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
@@ -56,6 +57,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -84,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
             "primary_notification_channel";
     private SharedPreferences mPreferences;
     private String sharedPrefFile = "com.example.alarmmanager";
-    private ToggleButton alarmToggle;
     private cardViewModel cards;
+    private SwitchCompat alarmToggle;
 
     //String and Integer array for Recycler View Items
 //    public static final String[] TITLES= {"進擊的巨人","Running Man","安眠書店"};

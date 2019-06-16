@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
 
-    style="@style/CardViewStyle"    >
+    style="@style/CardViewStyle"
+    card_view:cardElevation="8dp"
+    card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
         style="@style/Widget.CardContent"
@@ -12,8 +13,8 @@
 
         <TextView
             android:id="@+id/episode"
-            android:layout_width="75dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/card"
@@ -26,11 +27,12 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="90dp"
+            android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="28dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/episode"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
             android:paddingTop="5dp"
             android:text="Running Man"
             android:textColor="@android:color/black"
@@ -44,6 +46,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignStart="@+id/title"
+            android:layout_marginRight="3dp"
             android:paddingBottom="5dp"
             android:text="小鴨影音"
             android:textColor="#202020"
