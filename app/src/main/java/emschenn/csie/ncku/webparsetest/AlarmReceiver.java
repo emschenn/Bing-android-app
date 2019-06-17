@@ -75,16 +75,18 @@ public class AlarmReceiver extends BroadcastReceiver {
             if(MainActivity.myList3.get(i).charAt(0) =='M'){
                 website = 1;
             }
-
+            //List1 = Episode
+            //List2 = Title
+            //List3 = web
             oldcard = new cardData(MainActivity.myList2.get(i),MainActivity.myList3.get(i),MainActivity.myList1.get(i));
             newcard = new cardData(MainActivity.myList2.get(i),MainActivity.myList3.get(i),crawl.crawl_func(website,MainActivity.myList2.get(i)));
 
             if(!MainActivity.myList1.get(i).equals(crawl.crawl_func(website,MainActivity.myList2.get(i)))){
                 notify += MainActivity.myList2.get(i)+" : "+crawl.crawl_func(website,MainActivity.myList2.get(i))+"\n";
                 MainActivity.cards.update(oldcard,newcard);
-                System.out.println("Eq");
-            }else{
                 System.out.println("NEq");
+            }else{
+                System.out.println("Eq");
                 notify = "";
             }
         }
