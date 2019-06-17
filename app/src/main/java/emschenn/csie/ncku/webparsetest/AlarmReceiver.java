@@ -25,9 +25,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     // Notification channel ID.
     private static final String PRIMARY_CHANNEL_ID =
             "primary_notification_channel";
-    public String notify = "";
-    private cardData oldcard;
-    private cardData newcard;
+
 
     /**
      * Called when the BroadcastReceiver receives an Intent broadcast.
@@ -50,6 +48,9 @@ public class AlarmReceiver extends BroadcastReceiver {
      * @param context, activity context.
      */
     private void deliverNotification(Context context) {
+        String notify = "";
+        cardData oldcard;
+        cardData newcard;
         // Create the content intent for the notification, which launches
         // this activity
         Intent contentIntent = new Intent(context, MainActivity.class);
@@ -57,7 +58,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         PendingIntent contentPendingIntent = PendingIntent.getActivity
                 (context, NOTIFICATION_ID, contentIntent, PendingIntent
                         .FLAG_UPDATE_CURRENT);
-        notify = "";
         for(int i=0;i<MainActivity.myList1.size();i++){
             int website = -1;
             if(MainActivity.myList3.get(i).charAt(0) =='5'){
@@ -82,12 +82,11 @@ public class AlarmReceiver extends BroadcastReceiver {
             newcard = new cardData(MainActivity.myList2.get(i),MainActivity.myList3.get(i),crawl.crawl_func(website,MainActivity.myList2.get(i)));
 
             if(!MainActivity.myList1.get(i).equals(crawl.crawl_func(website,MainActivity.myList2.get(i)))){
-                notify += MainActivity.myList2.get(i)+" : "+crawl.crawl_func(website,MainActivity.myList2.get(i))+"\n";
+                notify += MainActivity.myList2.get(i)+" : 已更新至 "+crawl.crawl_func(website,MainActivity.myList2.get(i))+"\n";
                 MainActivity.cards.update(oldcard,newcard);
                 System.out.println("NEq");
             }else{
                 System.out.println("Eq");
-                notify = "";
             }
         }
         //System.out.println(notify);
@@ -97,7 +96,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             NotificationCompat.Builder builder = new NotificationCompat.Builder
                     (context, PRIMARY_CHANNEL_ID)
                     .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentTitle("更新囉")
+                    .setContentTitle("追蹤的劇集已更新！")
                     .setContentText(notify)
                     .setContentIntent(contentPendingIntent)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)

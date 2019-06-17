@@ -387,8 +387,26 @@ public class MainActivity extends AppCompatActivity {
                 //adapter.notifyDataSetChanged();// Notify the adapter
                 Log.d("title",title);
                 Log.d("site",site);
+                int website = -1;
+                if(site.charAt(0) =='5'){
+                    website = 5;
+                }
+                if(site.charAt(0) =='A'){
+                    website = 4;
+                }
+                if(site.charAt(0) =='1'){
+                    website = 3;
+                }
+                if(site.charAt(0) =='V'){
+                    website = 2;
+                }
+                if(site.charAt(0) =='M'){
+                    website = 1;
+                }
+                //crawl.crawl_func(website,title);
                 //addCard(title,site);
-                cards.insert(new cardData(title,site,"??"));
+                cards.insert(new cardData(title,site,"a"));
+
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
