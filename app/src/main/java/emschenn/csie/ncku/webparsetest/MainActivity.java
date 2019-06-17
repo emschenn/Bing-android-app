@@ -405,7 +405,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //crawl.crawl_func(website,title);
                 //addCard(title,site);
-                cards.insert(new cardData(title,site,"a"));
+                cards.insert(new cardData(title,site,"searching..."));
 
             }
         });
