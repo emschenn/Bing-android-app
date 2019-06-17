@@ -47,7 +47,7 @@
         android:background="@drawable/edittext"
         android:ems="10"
         android:gravity="top|left"
-        android:hint="訊息將會發送至ourapp@gmail.com"
+        android:hint="訊息會直接發送至我們的意見回饋資料庫"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

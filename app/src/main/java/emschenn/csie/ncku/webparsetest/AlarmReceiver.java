@@ -78,9 +78,14 @@ public class AlarmReceiver extends BroadcastReceiver {
 
             oldcard = new cardData(MainActivity.myList2.get(i),MainActivity.myList3.get(i),MainActivity.myList1.get(i));
             newcard = new cardData(MainActivity.myList2.get(i),MainActivity.myList3.get(i),crawl.crawl_func(website,MainActivity.myList2.get(i)));
-            MainActivity.cards.update(oldcard,newcard);
+
             if(!MainActivity.myList1.get(i).equals(crawl.crawl_func(website,MainActivity.myList2.get(i)))){
                 notify += MainActivity.myList2.get(i)+" : "+crawl.crawl_func(website,MainActivity.myList2.get(i))+"\n";
+                MainActivity.cards.update(oldcard,newcard);
+                System.out.println("Eq");
+            }else{
+                System.out.println("NEq");
+                notify = "";
             }
         }
         //System.out.println(notify);
@@ -99,6 +104,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
             // Deliver the notification
             mNotificationManager.notify(NOTIFICATION_ID, builder.build());
+            notify = "";
+            System.out.println("GGG");
         }else {
             System.out.println("no change");
         }
