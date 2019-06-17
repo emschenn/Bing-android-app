@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
                             // a 15 minute interval.
                             if (alarmManager != null) {
                                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                                        1000 * 120, notifyPendingIntent);
+                                        1000 * 60, notifyPendingIntent);
                             }
                             // Set the toast message for the "on" case.
                             toastMessage = "on";
