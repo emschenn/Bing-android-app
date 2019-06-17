@@ -1,4 +1,4 @@
-
+# Bing!
 ![](https://i.imgur.com/btIeeZJ.png)
 
 ## Some Information
@@ -23,6 +23,6 @@ Android studio Nexus 5 API 26
 
 
 ## member
-* 陳逸寧
+* 陳逸寧 
 * 王蒂元
 * 林禹辰
