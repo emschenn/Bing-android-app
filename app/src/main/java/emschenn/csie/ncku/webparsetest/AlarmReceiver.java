@@ -85,6 +85,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 notify += MainActivity.myList2.get(i)+" : 已更新至 "+crawl.crawl_func(website,MainActivity.myList2.get(i))+"\n";
                 MainActivity.cards.update(oldcard,newcard);
                 System.out.println("NEq");
+                MainActivity.myList1.set(i,crawl.crawl_func(website,MainActivity.myList2.get(i)));
             }else{
                 System.out.println("Eq");
             }
