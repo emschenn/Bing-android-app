@@ -166,9 +166,9 @@ public class MainActivity extends AppCompatActivity {
                 myList2.clear();
                 myList3.clear();
                 for(int i=0;i<adapter.getItemCount();i++){
-                    temp1 = adapter.getCardAtPosition(i).getEpisode();
-                    temp2 = adapter.getCardAtPosition(i).getTitle();
-                    temp3 = adapter.getCardAtPosition(i).getWebsite();
+                    temp1 = cards.getAllCards().getValue().get(i).getEpisode();
+                    temp2 = cards.getAllCards().getValue().get(i).getTitle();
+                    temp3 = cards.getAllCards().getValue().get(i).getWebsite();
                     myList1.add(i,temp1);
                     myList2.add(i,temp2);
                     myList3.add(i,temp3);
@@ -405,7 +405,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //crawl.crawl_func(website,title);
                 //addCard(title,site);
-                cards.insert(new cardData(title,site,"searching..."));
+                cards.insert(new cardData(title,site,"aa"));
 
             }
         });
@@ -514,4 +514,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void update(View view) {
+        cardData ocard;
+        cardData ncard;
+        for (int i = 0; i < MainActivity.myList1.size(); i++) {
+            int website = -1;
+            if (MainActivity.myList3.get(i).charAt(0) == '5') {
+                website = 5;
+            }
+            if (MainActivity.myList3.get(i).charAt(0) == 'A') {
+                website = 4;
+            }
+            if (MainActivity.myList3.get(i).charAt(0) == '1') {
+                website = 3;
+            }
+            if (MainActivity.myList3.get(i).charAt(0) == 'V') {
+                website = 2;
+            }
+            if (MainActivity.myList3.get(i).charAt(0) == 'M') {
+                website = 1;
+            }
+            //List1 = Episode
+            //List2 = Title
+            //List3 = web
+            ocard = new cardData(MainActivity.myList2.get(i), MainActivity.myList3.get(i), MainActivity.myList1.get(i));
+            ncard = new cardData(MainActivity.myList2.get(i), MainActivity.myList3.get(i), crawl.crawl_func(website, MainActivity.myList2.get(i)));
+            cards.update(ocard,ncard);
+        }
+    }
 }

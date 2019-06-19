@@ -91,7 +91,8 @@ public class AlarmReceiver extends BroadcastReceiver {
             }
         }
         //System.out.println(notify);
-        if(!notify.equals("")){
+        //!notify.equals("")
+        if(true){
             System.out.println(notify);
             // Build the notification
             NotificationCompat.Builder builder = new NotificationCompat.Builder
