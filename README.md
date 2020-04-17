@@ -19,8 +19,10 @@ implementation 'android.arch.lifecycle'
 Android API >= 23
 ### test device: 
 Android studio Nexus 5 API 26
-## How to use?
+### screentshot:
+![](https://i.imgur.com/19LOjnh.png)
 
+![](https://i.imgur.com/BpORges.png)
 
 ## member
 * 陳逸寧 
